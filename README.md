@@ -1,2 +1,2 @@
 # Genetic-Algorithm
-Genetic-Algorithm learning withPython
+Genetic-Algorithm learning with Python
