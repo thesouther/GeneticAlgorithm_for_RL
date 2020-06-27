@@ -53,7 +53,7 @@ def run_train():
     M = Mutation(conf.mutation_rate)
     g = GA(P, S, C, M)
 
-    best_individual = g.run(env,num_games=1, visualization=True)
+    best_individual = g.run(env,num_games=1, visualization=False)
     dump_model(best_individual, conf.save_path)
     env.close()
 
