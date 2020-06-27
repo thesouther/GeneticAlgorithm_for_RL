@@ -19,9 +19,11 @@ class GA:
     def run(self, env,num_games=1, visualization=True):
         self.population.initialize()
         gen = conf.train_generations
+        get_max_num = 0
         for n in range(1, gen+1):
             print("="*20,"generations: ",n,"="*20)
             fitness_list, best_individual = self.population.fitness(env, num_games, visualization)
+            best_individual = copy.deepcopy(best_individual)
             print("initial P.individuals.shape, best_individual.fitness",self.population.individuals.shape, best_individual.fitness)
 
             self.selection.select(self.population, conf.select_rate, conf.lucky_select_rate)
@@ -37,6 +39,11 @@ class GA:
             if conf.elitism:
                 pos = np.random.randint(self.population.size)
                 self.population.individuals[pos] = best_individual
+
+            if best_individual.fitness >= conf.max_fitness:
+                get_max_num+=1
+            if get_max_num >= 10:
+                break
             
         return best_individual
 
@@ -53,14 +60,14 @@ def run_train():
     M = Mutation(conf.mutation_rate)
     g = GA(P, S, C, M)
 
-    best_individual = g.run(env,num_games=1, visualization=True)
+    best_individual = g.run(env,num_games=conf.num_games_per_individual, visualization=False)
     dump_model(best_individual, conf.save_path)
     env.close()
 
 def test_best_ind():
     env = gym.make("Pong-ram-v0").env
     best_individual = load_model(conf.save_path)
-    fitness = best_individual.play_and_evaluation(env, num_games=3, visualization=True)
+    fitness = best_individual.play_and_evaluation(env, num_games=3, visualization=False)
     print("fitness", fitness)
     env.close()
 
