@@ -60,7 +60,7 @@ class Individual:
                 if done:
                     pre_observation = []
                     break
-        return self.fitness/num_games
+        return self.fitness # / num_games
 
 
     def sigmoid(self, x):
@@ -122,7 +122,7 @@ class RouletteWheelSelection(Selection):
         for i in range(int(lucky_select_rate*population.size)):
             ran = np.random.randint(select_rate*population.size, population.size)
             selected_individuals.append(sorted_pop[ran])
-        random.shuffle(selected_individuals)
+        # random.shuffle(selected_individuals)
         population.individuals = np.array([copy.deepcopy(I) for I in selected_individuals])
 
 #=====================交叉==========================

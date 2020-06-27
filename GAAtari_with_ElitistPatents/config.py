@@ -6,6 +6,9 @@ class Config:
         self.observation_space = 0 # 状态空间，由环境定义时指定
         self.action_space = 0 # 动作空间维度，由环境定义时指定
         self.num_hidden_nodes = 32 # 使用两层网络时，隐层的权重数量 
+
+        self.num_games_per_individual = 3 # 每个个体在计算fitness时，运行几次游戏
+        self.max_fitness = self.num_games_per_individual*21 # fitness的最大值
         
         self.population_size = 100 # 每一代群体中的个体数量，应该>=10
         self.train_generations = 150 # 训练迭代的代数
@@ -18,7 +21,7 @@ class Config:
         self.num_children_per_couple = int((1 / (self.select_rate+self.lucky_select_rate))*2) # 每对夫妻产生的孩子的数量
         # print(self.num_children_per_couple)
 
-        self.mutation_rate = 0.2
+        self.mutation_rate = 0.2 # 变异率
         self.mutation_alpha = np.random.rand()
 
         self.elitism = True  # 是否使用精英政策
