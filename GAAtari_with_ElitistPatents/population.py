@@ -186,8 +186,9 @@ class Crossover:
                     new_individuals.append(individual_a)
                     new_individuals.append(individual_b)
 
-        # random.shuffle(new_individuals)
-        population.individuals = np.array(new_individuals[0: population.size])
+        new_pop = np.array(new_individuals[0: population.size])
+        random.shuffle(new_pop)
+        population.individuals = new_pop
         # print(population.individuals)
 
 #=====================变异==========================
