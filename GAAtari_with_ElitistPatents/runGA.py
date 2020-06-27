@@ -60,7 +60,7 @@ def run_train():
 def test_best_ind():
     env = gym.make("Pong-ram-v0").env
     best_individual = load_model(conf.save_path)
-    fitness = best_individual.play_and_evaluation(env, num_games=3, visualization=True)
+    fitness = best_individual.play_and_evaluation(env, num_games=3, visualization=False)
     print("fitness", fitness)
     env.close()
 
